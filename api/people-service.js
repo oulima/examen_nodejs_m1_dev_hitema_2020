@@ -1,4 +1,5 @@
 const fs = require('fs');
+const HttpStatus = require('http-status-codes');
 
 module.exports = class PeopleService {
     constructor() {
@@ -6,10 +7,28 @@ module.exports = class PeopleService {
     }
 
     updatePeople(id, people) {
-        // To be implemented!
+        let target = this.peoples[id]
+        if (target === undefined) {
+            return HttpStatus.NOT_FOUND;
+        }
+        this.peoples[id] = people;
+        return HttpStatus.OK;
     }
     
     getPeople(filters) {
-        // To be implemented!
+        const EMPTY = 0
+        if (Object.entries(filters).length === EMPTY){
+            return this.peoples;
+        }
+
+        let filtered = []
+        this.peoples.forEach(people => {
+            for (const key in filters) {
+                if (people[key] === filters[key]) {
+                    filtered.push(people)
+                }
+            }
+        });
+        return filtered;
     }
 }
