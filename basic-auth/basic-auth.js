@@ -1,5 +1,3 @@
-/* 
-
 const crypto = require('crypto');
 
 function sha1Encode(data) {
@@ -16,14 +14,5 @@ module.exports.digestAuth = (request, response, next) => {
     const isValid = authentification[0] === 'node' && authentification[1] === 'password';
     
     isValid ? next() : response.sendStatus(401);
-} */
+} 
   
-const crypto = require('crypto');
-
-function sha1Encode(data) {
-    // To be implemented!
-}
-
-module.exports.digestAuth = (request, response, next) => {
-    // To be implemented!
-}
